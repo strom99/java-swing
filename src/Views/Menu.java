@@ -8,7 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Locale;
 
-public class Menu extends JDialog {
+public class Menu extends JFrame {
     private JLabel iconBook;
     private JLabel titleLibrary;
     private JButton newButton;
@@ -26,29 +26,28 @@ public class Menu extends JDialog {
     public Menu() {
         // imprecindible to run the codig
         setContentPane(panelMain);
+        pack();
+        setTitle("Welcome");
+        setSize(700, 600);
+        setLocationRelativeTo(null);
+        setVisible(true);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
         newButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                registerAuthor();
+                newAuthorActionPerformed();
             }
         });
     }
 
-    public void registerAuthor() {
-        JDialog regUser = new NewAuthor(this);
-        regUser.setSize(300, 300);
-        regUser.setLocationRelativeTo(null);
-        regUser.setVisible(true);
-        regUser.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+    public void newAuthorActionPerformed() {
+        NewAuthor x = new NewAuthor(this, true);
+        x.setLocationRelativeTo(null);
+        x.setVisible(true);
     }
 
     public static void main(String[] args) {
         Menu menu = new Menu();
-        menu.pack();
-        menu.setLocationRelativeTo(null);
-        menu.setTitle("Welcome");
-        menu.setSize(600, 500);
-        menu.setVisible(true);
     }
 
     {
@@ -171,4 +170,5 @@ public class Menu extends JDialog {
     public JComponent $$$getRootComponent$$$() {
         return panelMain;
     }
+
 }
