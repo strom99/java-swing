@@ -1,5 +1,8 @@
 package Views;
 
+import Controller.ControllerAuthor;
+import Model.Author;
+
 import javax.swing.*;
 import javax.swing.plaf.FontUIResource;
 import javax.swing.text.StyleContext;
@@ -7,6 +10,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Locale;
+
+import static Controller.ControllerAuthor.Authors;
 
 public class Menu extends JFrame {
     private JLabel iconBook;
@@ -30,14 +35,34 @@ public class Menu extends JFrame {
         setTitle("Welcome");
         setSize(700, 600);
         setLocationRelativeTo(null);
-        setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setVisible(true);
+
+        Authors.add(new Author("caca", "caca", "caca", "caca"));
+        Authors.add(new Author("test", "test", "test", "test"));
+
         newButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 newAuthorActionPerformed();
             }
         });
+        modifyButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                modifyAuthorActionPerformed();
+            }
+        });
+    }
+
+    public void modifyAuthorActionPerformed() {
+        if (ControllerAuthor.getAuthors().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "No hay Autores registrados", "Sin Autores", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            ModifyAuthor x = new ModifyAuthor(this, true);
+            x.setLocationRelativeTo(null);
+            x.setVisible(true);
+        }
     }
 
     public void newAuthorActionPerformed() {
@@ -48,6 +73,7 @@ public class Menu extends JFrame {
 
     public static void main(String[] args) {
         Menu menu = new Menu();
+
     }
 
     {
