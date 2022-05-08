@@ -13,7 +13,7 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.ArrayList;
 
-import static Controller.ControllerAuthor.getAuthorByFullName;
+import static Controller.ControllerAuthor.*;
 
 public class ModifyAuthor extends JDialog {
     Author authorSelectioned;
@@ -37,30 +37,35 @@ public class ModifyAuthor extends JDialog {
         setSize(600, 500);
 
         for (Author u : ControllerAuthor.getAuthors()) {
-            comboBoxAuthors.addItem(u.getName() + " " + u.getSurname() + " " + u.getSecondSurname() + " " + u.getCountry());
+            comboBoxAuthors.addItem(u.getName() + " " + u.getSurname() + " " + u.getSecondSurname());
             //u.getName() + ":" + u.getSurname() + ":" + u.getSecondSurname() + ":" + u.getCountry()
         }
 
         selectItem();
-
+        // cancel modify
         buttonCancelModify.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
             }
         });
+
+        // save modify Author
         buttonModify.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                modifyAction();
             }
         });
 
+        // select user combobox
         selectButtonAuthor.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 selectItem();
             }
         });
+
         comboBoxAuthors.addItemListener(new ItemListener() {
             public void itemStateChanged(ItemEvent e) {
                 System.out.println("Selected item + " + e);
@@ -78,6 +83,18 @@ public class ModifyAuthor extends JDialog {
             textFieldCountry.setText(authorSelectioned.getCountry());
         } catch (AuthorException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Error cargando usuarios", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    public void modifyAction() {
+        try {
+            // modifyAuthor(authorSelectioned, textFieldSurname.getText() , textFieldSurname.getText() , textFieldSeSurname.getText(),textFieldCountry.getText());
+            modifyAuthor(authorSelectioned, textFieldModifyName.getText(), textFieldSurname.getText(), textFieldSeSurname.getText(), textFieldCountry.getText());
+            JOptionPane.showMessageDialog(this, "El author " + authorSelectioned.getName() + " ha sido modificado con éxito", "Modificación de usuario", JOptionPane.INFORMATION_MESSAGE);
+            dispose();
+        } catch (AuthorException ex) {
+            // No debería darse, pero muestro msg
+            JOptionPane.showConfirmDialog(this, ex.getMessage());
         }
     }
 

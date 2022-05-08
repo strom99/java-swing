@@ -53,6 +53,12 @@ public class Menu extends JFrame {
                 modifyAuthorActionPerformed();
             }
         });
+        removeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                removeAuthor();
+            }
+        });
     }
 
     public void modifyAuthorActionPerformed() {
@@ -74,6 +80,16 @@ public class Menu extends JFrame {
     public static void main(String[] args) {
         Menu menu = new Menu();
 
+    }
+
+    public void removeAuthor() {
+        if (ControllerAuthor.getAuthors().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "No hay Autores registrados", "Sin Autores", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            DeleteAuthor x = new DeleteAuthor(this, true);
+            x.setLocationRelativeTo(null);
+            x.setVisible(true);
+        }
     }
 
     {

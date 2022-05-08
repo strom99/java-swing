@@ -6,15 +6,25 @@ public class Author {
     private String secondSurname;
     private String country;
 
+    public Author (){}
+
     public Author(String name){
         this.name = name;
     }
+
+    public Author(String name , String surname ,String secondSurname){
+        this.name = name;
+        this.surname = surname;
+        this.secondSurname = secondSurname;
+    }
+
     public Author(String name , String surname ,String secondSurname , String country){
         this.name = name;
         this.surname = surname;
         this.secondSurname = secondSurname;
         this.country = country;
     }
+
 
     public String getName() {
         return name;
