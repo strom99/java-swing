@@ -40,7 +40,7 @@
           </component>
         </children>
       </grid>
-      <component id="f6e1b" class="javax.swing.JButton" binding="newButton" default-binding="true">
+      <component id="f6e1b" class="javax.swing.JButton" binding="newButtonAuthors">
         <constraints>
           <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
@@ -49,7 +49,7 @@
           <text value="New"/>
         </properties>
       </component>
-      <component id="c2515" class="javax.swing.JButton" binding="modifyButton" default-binding="true">
+      <component id="c2515" class="javax.swing.JButton" binding="modifyButtonAuthor">
         <constraints>
           <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
@@ -58,7 +58,7 @@
           <text value="Modify"/>
         </properties>
       </component>
-      <component id="209a8" class="javax.swing.JButton" binding="removeButton" default-binding="true">
+      <component id="209a8" class="javax.swing.JButton" binding="removeButtonAuthor">
         <constraints>
           <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
@@ -67,7 +67,7 @@
           <text value="Remove"/>
         </properties>
       </component>
-      <component id="f955e" class="javax.swing.JButton" binding="newButton1" default-binding="true">
+      <component id="f955e" class="javax.swing.JButton" binding="newButtonBook">
         <constraints>
           <grid row="3" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
@@ -76,7 +76,7 @@
           <text value="New"/>
         </properties>
       </component>
-      <component id="34d46" class="javax.swing.JButton" binding="modifyButton1" default-binding="true">
+      <component id="34d46" class="javax.swing.JButton" binding="modifyButtonBook">
         <constraints>
           <grid row="4" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
@@ -85,7 +85,7 @@
           <text value="Modify"/>
         </properties>
       </component>
-      <component id="240f7" class="javax.swing.JButton" binding="removeButton1" default-binding="true">
+      <component id="240f7" class="javax.swing.JButton" binding="removeButtonBook">
         <constraints>
           <grid row="5" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
@@ -94,7 +94,7 @@
           <text value="Remove"/>
         </properties>
       </component>
-      <component id="1c70e" class="javax.swing.JButton" binding="searchButton" default-binding="true">
+      <component id="1c70e" class="javax.swing.JButton" binding="searchButtonBook">
         <constraints>
           <grid row="6" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>

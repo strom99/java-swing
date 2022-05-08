@@ -4,6 +4,7 @@ import Controller.ControllerAuthor;
 import Model.Author;
 
 import javax.swing.*;
+import javax.swing.plaf.synth.SynthOptionPaneUI;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,7 +14,6 @@ import static Controller.ControllerAuthor.getAuthorByFullName;
 
 public class DeleteAuthor extends JDialog {
 
-    Author authorSelectionated ;
     private JComboBox comboBoxAuthorsDelete;
     private JButton buttonCancel;
     private JButton buttonDelete;
@@ -40,18 +40,27 @@ public class DeleteAuthor extends JDialog {
         buttonDelete.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                delete();
+                try {
+                    delete();
+                    dispose();
+                } catch (Exception ex) {
+                    ex.getMessage();
+                }
             }
         });
     }
 
-    public void delete() throws AuthorException {
-        try{
-            authorSelectionated = getAuthorByFullName((String)comboBoxAuthorsDelete.getSelectedItem());
-            deleteAuthor(authorSelectionated);
+    public void delete() throws Exception {
+        Author x = getAuthorByFullName((String) comboBoxAuthorsDelete.getSelectedItem());
+        deleteAuthor(x);
+
+        /*try{
+            x = getAuthorByFullName((String)comboBoxAuthorsDelete.getSelectedItem());
+            deleteAuthor(x);
+            JOptionPane.showMessageDialog(this, "El author " + x.getName() + " ha sido modificado con éxito", "Modificación de usuario", JOptionPane.INFORMATION_MESSAGE);
         }catch (AuthorException ex){
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Error cargando usuarios", JOptionPane.ERROR_MESSAGE);
-        }
+        }*/
     }
 
     {

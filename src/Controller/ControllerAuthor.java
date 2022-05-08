@@ -36,11 +36,11 @@ public class ControllerAuthor {
         x.setCountry(newCountry);
     }
 
-    public static void deleteAuthor(Author x) throws AuthorException{
-        if(Authors.contains(x)){
-            Authors.remove(x);
+    public static void deleteAuthor(Author x) throws AuthorException {
+        if(!Authors.contains(x)){
+            throw new AuthorException("No se pudo eliminar");
         }else{
-            throw new AuthorException("no se elimino");
+            Authors.remove(x);
         }
     }
 

@@ -98,20 +98,6 @@ public class ModifyAuthor extends JDialog {
         }
     }
 
-/*
-    public void modifyAuthor() {
-        String nameSelected = (String) comboBoxAuthors.getSelectedItem().toString();
-
-        try {
-            authorSelectioned = getAuthorByName(nameSelected);
-            textFieldModifyName.setText(authorSelectioned.getName());
-            textFieldSurname.setText(authorSelectioned.getSurname());
-            textFieldSeSurname.setText(authorSelectioned.getSecondSurname());
-            textFieldCountry.setText(authorSelectioned.getCountry());
-        } catch (AuthorException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage());
-        }
-    }*/
 
 
     {
