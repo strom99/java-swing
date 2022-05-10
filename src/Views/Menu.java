@@ -67,6 +67,24 @@ public class Menu extends JFrame {
                 windowRegisterBook();
             }
         });
+        modifyButtonBook.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                modifyBookWindow();
+            }
+        });
+        removeButtonBook.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                removeBookWindow();
+            }
+        });
+        searchButtonBook.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                searchBookWindow();
+            }
+        });
     }
 
     public void modifyAuthorActionPerformed() {
@@ -108,6 +126,22 @@ public class Menu extends JFrame {
             windowBookRegister.setLocationRelativeTo(null);
             windowBookRegister.setVisible(true);
         }
+    }
+
+    public void modifyBookWindow() {
+        ModifyBook window = new ModifyBook(this, true);
+        window.setLocationRelativeTo(null);
+        window.setVisible(true);
+    }
+
+    public void removeBookWindow() {
+
+    }
+
+    public void searchBookWindow() {
+        SearchBooks window = new SearchBooks(this, true);
+        window.setLocationRelativeTo(null);
+        window.setVisible(true);
     }
 
     {
