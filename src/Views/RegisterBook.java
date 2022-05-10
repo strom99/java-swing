@@ -5,6 +5,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import static Controller.ControllerBook.registerBook;
+
 public class RegisterBook extends JDialog {
     private JLabel labelISBN;
     private JTextField textFieldISBN;
@@ -33,9 +35,18 @@ public class RegisterBook extends JDialog {
         registerButtonBook.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("registered");
+                registerBook();
             }
         });
+    }
+
+    public void registerBook(){
+        String title = textFieldTitle.getText();
+        String ISBN = textFieldISBN.getText();
+        String Author = textFieldAuthor.getText();
+        String NumberPages = textFieldNumPages.getText();
+        String gender = textFieldGender.getText();
+
     }
 
     {

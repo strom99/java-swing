@@ -135,7 +135,9 @@ public class Menu extends JFrame {
     }
 
     public void removeBookWindow() {
-
+        DeleteBook window = new DeleteBook(this, true);
+        window.setLocationRelativeTo(null);
+        window.setVisible(true);
     }
 
     public void searchBookWindow() {
