@@ -1,11 +1,18 @@
 package Views;
 
+import Controller.ControllerAuthor;
+import Controller.ControllerBook;
+import Model.Author;
+import Model.Books;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import Exception.BookException;
 
-import static Controller.ControllerBook.registerBook;
+import static Controller.ControllerBook.getAuthorBook;
+import static Controller.ControllerBook.registerBooks;
 
 public class RegisterBook extends JDialog {
     private JLabel labelISBN;
@@ -13,10 +20,10 @@ public class RegisterBook extends JDialog {
     private JTextField textFieldTitle;
     private JTextField textFieldNumPages;
     private JTextField textFieldGender;
-    private JTextField textFieldAuthor;
     private JButton cancelButtonRegBook;
     private JButton registerButtonBook;
     private JPanel panelRegisterBook;
+    private JComboBox comboBoxRegBooks;
 
     public RegisterBook(JFrame parent, boolean model) {
         super(parent, model);
@@ -25,6 +32,11 @@ public class RegisterBook extends JDialog {
         setTitle("Register Book");
         setSize(500, 400);
         setLocationRelativeTo(null);
+
+        for (Author u : ControllerAuthor.getAuthors()) {
+            comboBoxRegBooks.addItem(u.getName() + " " + u.getSurname() + " " + u.getSecondSurname());
+            //u.getName() + ":" + u.getSurname() + ":" + u.getSecondSurname() + ":" + u.getCountry()
+        }
 
         cancelButtonRegBook.addActionListener(new ActionListener() {
             @Override
@@ -35,18 +47,37 @@ public class RegisterBook extends JDialog {
         registerButtonBook.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                registerBook();
+                register();
             }
         });
     }
 
-    public void registerBook(){
-        String title = textFieldTitle.getText();
-        String ISBN = textFieldISBN.getText();
-        String Author = textFieldAuthor.getText();
-        String NumberPages = textFieldNumPages.getText();
-        String gender = textFieldGender.getText();
+    public void register() {
+        if (ControllerAuthor.Authors.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Aun no hay authores registrados", "Datos vacíos", JOptionPane.WARNING_MESSAGE);
+        } else {
+            String title = textFieldTitle.getText();
+            String ISBN = textFieldISBN.getText();
+            Author nameAuthor = getAuthorBook((String) comboBoxRegBooks.getSelectedItem());
+            String Author = nameAuthor.getName() + " " + nameAuthor.getSurname() + " " + nameAuthor.getSecondSurname();
+            String NumberPages = textFieldNumPages.getText();
+            String gender = textFieldGender.getText();
 
+            if (title.isEmpty() || ISBN.isEmpty() || NumberPages.isEmpty() || gender.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "No se puede dejar campos en blanco", "Datos vacíos", JOptionPane.WARNING_MESSAGE);
+            } else {
+                try {
+                    Books x = new Books(title, ISBN, Author, NumberPages, gender);
+                    registerBooks(x);
+                    JOptionPane.showMessageDialog(this, "Libro registrado", "Libro registrado", JOptionPane.INFORMATION_MESSAGE);
+                    // salida por pantalla auxiliar para mí, para comprobar que todo va bien
+                    System.out.println(ControllerAuthor.getAuthors());
+                    dispose();
+                } catch (BookException ex) {
+                    JOptionPane.showMessageDialog(this, ex.getMessage(), "Error en alta", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        }
     }
 
     {
@@ -104,8 +135,6 @@ public class RegisterBook extends JDialog {
         panelRegisterBook.add(textFieldNumPages, new com.intellij.uiDesigner.core.GridConstraints(3, 4, 1, 9, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
         textFieldGender = new JTextField();
         panelRegisterBook.add(textFieldGender, new com.intellij.uiDesigner.core.GridConstraints(4, 4, 1, 9, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
-        textFieldAuthor = new JTextField();
-        panelRegisterBook.add(textFieldAuthor, new com.intellij.uiDesigner.core.GridConstraints(5, 4, 1, 9, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
         final com.intellij.uiDesigner.core.Spacer spacer9 = new com.intellij.uiDesigner.core.Spacer();
         panelRegisterBook.add(spacer9, new com.intellij.uiDesigner.core.GridConstraints(0, 12, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_VERTICAL, 1, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
         final com.intellij.uiDesigner.core.Spacer spacer10 = new com.intellij.uiDesigner.core.Spacer();
@@ -137,6 +166,8 @@ public class RegisterBook extends JDialog {
         panelRegisterBook.add(spacer15, new com.intellij.uiDesigner.core.GridConstraints(2, 14, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
         final com.intellij.uiDesigner.core.Spacer spacer16 = new com.intellij.uiDesigner.core.Spacer();
         panelRegisterBook.add(spacer16, new com.intellij.uiDesigner.core.GridConstraints(0, 11, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
+        comboBoxRegBooks = new JComboBox();
+        panelRegisterBook.add(comboBoxRegBooks, new com.intellij.uiDesigner.core.GridConstraints(5, 4, 1, 9, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
     }
 
     /**
@@ -145,4 +176,5 @@ public class RegisterBook extends JDialog {
     public JComponent $$$getRootComponent$$$() {
         return panelRegisterBook;
     }
+
 }

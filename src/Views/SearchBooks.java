@@ -1,11 +1,16 @@
 package Views;
 
+import Controller.ControllerAuthor;
+import Controller.ControllerBook;
+import Model.Author;
+import Model.Books;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class SearchBooks extends JDialog {
-    private JComboBox comboBox1;
-    private JComboBox comboBox2;
+    private JComboBox comboBoxAuthors;
+    private JComboBox comboBoxBooks;
     private JPanel panelBook;
     private JLabel labelTitle;
     private JLabel labelAuthor;
@@ -24,6 +29,14 @@ public class SearchBooks extends JDialog {
         setTitle("Search Book");
         setContentPane(panelBook);
         setSize(600, 500);
+
+        for (Author x : ControllerAuthor.Authors) {
+            comboBoxAuthors.addItem(x.getName() + " " + x.getSurname() + " " + x.getSecondSurname());
+        }
+
+        for (Books x : ControllerBook.Books) {
+            comboBoxBooks.addItem(x.getTitle());
+        }
     }
 
     {
@@ -63,10 +76,10 @@ public class SearchBooks extends JDialog {
         final JLabel label3 = new JLabel();
         label3.setText("Gender");
         panel1.add(label3, new com.intellij.uiDesigner.core.GridConstraints(2, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        comboBox1 = new JComboBox();
-        panel1.add(comboBox1, new com.intellij.uiDesigner.core.GridConstraints(1, 2, 1, 5, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        comboBox2 = new JComboBox();
-        panel1.add(comboBox2, new com.intellij.uiDesigner.core.GridConstraints(2, 2, 1, 5, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        comboBoxAuthors = new JComboBox();
+        panel1.add(comboBoxAuthors, new com.intellij.uiDesigner.core.GridConstraints(1, 2, 1, 5, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        comboBoxBooks = new JComboBox();
+        panel1.add(comboBoxBooks, new com.intellij.uiDesigner.core.GridConstraints(2, 2, 1, 5, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         final com.intellij.uiDesigner.core.Spacer spacer4 = new com.intellij.uiDesigner.core.Spacer();
         panel1.add(spacer4, new com.intellij.uiDesigner.core.GridConstraints(0, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
         final com.intellij.uiDesigner.core.Spacer spacer5 = new com.intellij.uiDesigner.core.Spacer();
