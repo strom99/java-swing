@@ -19,6 +19,7 @@ public class ControllerBook {
     public static ArrayList<Books> getBooks() {
         return Books;
     }
+
     public static void registerBooks(Books x) throws BookException {
         if (CopyBooks.contains(x)) {
             throw new BookException("Ya existe un libro con ese ISBN");
@@ -41,6 +42,15 @@ public class ControllerBook {
         String[] parts = x.split(" ");
         Author author = new Author(parts[0], parts[1], parts[2]);
         return Authors.get(Authors.indexOf(author));
+    }
+
+    public static Books getBookByIsbn(String x) throws BookException {
+        String[] parts = x.split("-");
+        Books w = new Books(parts[0]);
+        if (!Books.contains(w)) {
+            throw new BookException("Error ISBN");
+        }
+        return w;
     }
 
 }

@@ -1,5 +1,7 @@
 package Model;
 
+import java.awt.print.Book;
+
 public class Books {
     private String title;
     private int ISBN;
@@ -26,6 +28,10 @@ public class Books {
         this.author = author;
         this.NumberOfPages = NumberOfPages;
         this.gender = gender;
+    }
+
+    public Books(String ISBN ){
+        this.isbn = ISBN;
     }
 
     public String getTitle() {

@@ -129,9 +129,13 @@ public class Menu extends JFrame {
     }
 
     public void modifyBookWindow() {
-        ModifyBook window = new ModifyBook(this, true);
-        window.setLocationRelativeTo(null);
-        window.setVisible(true);
+        if (ControllerBook.getBooks().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Aun No hay libros registradpos", "Sin libros", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            ModifyBook window = new ModifyBook(this, true);
+            window.setLocationRelativeTo(null);
+            window.setVisible(true);
+        }
     }
 
     public void removeBookWindow() {

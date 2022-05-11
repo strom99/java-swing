@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="Views.ModifyBook">
-  <grid id="27dc6" binding="panelModify" layout-manager="GridLayoutManager" row-count="11" column-count="13" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+  <grid id="27dc6" binding="panelModify" layout-manager="GridLayoutManager" row-count="9" column-count="13" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
-      <xy x="20" y="20" width="662" height="501"/>
+      <xy x="20" y="20" width="639" height="426"/>
     </constraints>
     <properties/>
     <border type="none"/>
@@ -75,9 +75,9 @@
               <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
             </constraints>
           </vspacer>
-          <vspacer id="3b56b">
+          <vspacer id="5b30c">
             <constraints>
-              <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+              <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
             </constraints>
           </vspacer>
         </children>
@@ -90,30 +90,6 @@
           <text value="Author"/>
         </properties>
       </component>
-      <component id="103fe" class="javax.swing.JComboBox" binding="comboBox2" default-binding="true">
-        <constraints>
-          <grid row="4" column="2" row-span="1" col-span="7" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties/>
-      </component>
-      <component id="2b52e" class="javax.swing.JButton" binding="buttonSelect">
-        <constraints>
-          <grid row="4" column="10" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <text value="Select"/>
-        </properties>
-      </component>
-      <vspacer id="e768a">
-        <constraints>
-          <grid row="8" column="3" row-span="1" col-span="6" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
-        </constraints>
-      </vspacer>
-      <vspacer id="40316">
-        <constraints>
-          <grid row="10" column="3" row-span="1" col-span="6" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
-        </constraints>
-      </vspacer>
       <hspacer id="63ced">
         <constraints>
           <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
@@ -134,14 +110,9 @@
           <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
       </hspacer>
-      <hspacer id="98de9">
-        <constraints>
-          <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-        </constraints>
-      </hspacer>
       <component id="b40a3" class="javax.swing.JButton" binding="buttonCancel">
         <constraints>
-          <grid row="9" column="2" row-span="1" col-span="5" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="8" column="2" row-span="1" col-span="5" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <hideActionText value="false"/>
@@ -150,7 +121,7 @@
       </component>
       <component id="e743a" class="javax.swing.JButton" binding="buttonCheckEdition">
         <constraints>
-          <grid row="9" column="8" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="8" column="8" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="Edit"/>
@@ -164,7 +135,7 @@
           <text value="Title"/>
         </properties>
       </component>
-      <component id="b6b2f" class="javax.swing.JTextField" binding="textField1" default-binding="true">
+      <component id="b6b2f" class="javax.swing.JTextField" binding="textFieldTitle">
         <constraints>
           <grid row="3" column="2" row-span="1" col-span="7" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -185,7 +156,7 @@
           <text value="ISBN"/>
         </properties>
       </component>
-      <component id="1ea33" class="javax.swing.JTextField" binding="textField2" default-binding="true">
+      <component id="1ea33" class="javax.swing.JTextField" binding="textFieldISBN">
         <constraints>
           <grid row="5" column="2" row-span="1" col-span="7" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -193,7 +164,7 @@
         </constraints>
         <properties/>
       </component>
-      <component id="cf6ae" class="javax.swing.JTextField" binding="textField3" default-binding="true">
+      <component id="cf6ae" class="javax.swing.JTextField" binding="textFieldNuPages">
         <constraints>
           <grid row="6" column="2" row-span="1" col-span="7" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -217,7 +188,7 @@
           <text value="Gender"/>
         </properties>
       </component>
-      <component id="5bfc7" class="javax.swing.JTextField" binding="textField4" default-binding="true">
+      <component id="5bfc7" class="javax.swing.JTextField" binding="textFieldGender">
         <constraints>
           <grid row="7" column="2" row-span="1" col-span="7" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -232,18 +203,31 @@
       </hspacer>
       <hspacer id="4fafe">
         <constraints>
-          <grid row="9" column="7" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="8" column="7" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
       </hspacer>
+      <component id="12d17" class="javax.swing.JTextField" binding="textFieldAuthorName">
+        <constraints>
+          <grid row="4" column="2" row-span="1" col-span="7" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+        </constraints>
+        <properties/>
+      </component>
       <component id="163e9" class="javax.swing.JLabel">
         <constraints>
-          <grid row="9" column="10" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="8" column="10" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <icon value="Images/open-book.png"/>
           <text value=""/>
         </properties>
       </component>
+      <hspacer id="c4577">
+        <constraints>
+          <grid row="1" column="5" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+      </hspacer>
     </children>
   </grid>
 </form>

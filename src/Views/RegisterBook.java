@@ -35,7 +35,6 @@ public class RegisterBook extends JDialog {
 
         for (Author u : ControllerAuthor.getAuthors()) {
             comboBoxRegBooks.addItem(u.getName() + " " + u.getSurname() + " " + u.getSecondSurname());
-            //u.getName() + ":" + u.getSurname() + ":" + u.getSecondSurname() + ":" + u.getCountry()
         }
 
         cancelButtonRegBook.addActionListener(new ActionListener() {
