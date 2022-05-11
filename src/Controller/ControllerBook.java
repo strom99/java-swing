@@ -33,6 +33,7 @@ public class ControllerBook {
         Model.Books u = new Books(title, isbn, Author, numberPages, gender);
         CopyBooks.add(x);
         Books.add(u);
+        System.out.println(u);
 
     }
 

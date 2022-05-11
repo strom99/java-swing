@@ -1,10 +1,13 @@
 package Views;
 
+import Controller.ControllerBook;
+import Model.Books;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class ModifyBook extends JDialog {
-    private JComboBox comboBox1;
+    private JComboBox comboBoxModBooks;
     private JButton buttonSelectModifyBook;
     private JComboBox comboBox2;
     private JButton buttonSelect;
@@ -22,6 +25,11 @@ public class ModifyBook extends JDialog {
         setTitle("Modify Book");
         setContentPane(panelModify);
         setSize(600, 500);
+
+
+        for(Books u : ControllerBook.Books){
+            comboBoxModBooks.addItem(u.getTitle()+" - "+ u.getISBN());
+        }
     }
 
     {
@@ -45,8 +53,8 @@ public class ModifyBook extends JDialog {
         panel1.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(3, 7, new Insets(0, 0, 0, 0), -1, -1));
         panel1.setBackground(new Color(-865102));
         panelModify.add(panel1, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 13, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
-        comboBox1 = new JComboBox();
-        panel1.add(comboBox1, new com.intellij.uiDesigner.core.GridConstraints(1, 2, 1, 2, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        comboBoxModBooks = new JComboBox();
+        panel1.add(comboBoxModBooks, new com.intellij.uiDesigner.core.GridConstraints(1, 2, 1, 2, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         buttonSelectModifyBook = new JButton();
         buttonSelectModifyBook.setText("Select");
         panel1.add(buttonSelectModifyBook, new com.intellij.uiDesigner.core.GridConstraints(1, 5, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));

@@ -89,4 +89,15 @@ public class Books {
         final Books other = (Books) obj;
         return isbn.equalsIgnoreCase(other.isbn);
     }
+
+    @Override
+    public String toString() {
+        return "Books{" +
+                "title='" + title + '\'' +
+                ", ISBN=" + ISBN +
+                ", NumberOfPages=" + NumberOfPages +
+                ", gender='" + gender + '\'' +
+                ", author='" + author + '\'' +
+                '}';
+    }
 }
