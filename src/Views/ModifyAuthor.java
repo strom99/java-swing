@@ -1,10 +1,12 @@
 package Views;
 
 import Controller.ControllerAuthor;
+import Controller.ControllerBook;
 import Model.Author;
 
 import javax.swing.*;
 import Exception.AuthorException;
+import Model.Books;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -14,6 +16,7 @@ import java.awt.event.ItemListener;
 import java.util.ArrayList;
 
 import static Controller.ControllerAuthor.*;
+import static Controller.ControllerBook.getBookByIsbn;
 
 public class ModifyAuthor extends JDialog {
     Author authorSelectioned;

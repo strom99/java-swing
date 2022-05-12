@@ -4,11 +4,8 @@ import java.awt.print.Book;
 
 public class Books {
     private String title;
-    private int ISBN;
-    private int NumberOfPages;
     private String gender;
     private String author;
-
     private String isbn ;
     private String pages;
 
@@ -22,14 +19,6 @@ public class Books {
         this.gender = gender;
     }
 
-    public Books(String title , int ISBN,String author, int NumberOfPages,String gender){
-        this.title = title;
-        this.ISBN = ISBN;
-        this.author = author;
-        this.NumberOfPages = NumberOfPages;
-        this.gender = gender;
-    }
-
     public Books(String ISBN ){
         this.isbn = ISBN;
     }
@@ -40,22 +29,6 @@ public class Books {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public int getISBN() {
-        return ISBN;
-    }
-
-    public void setISBN(int ISBN) {
-        this.ISBN = ISBN;
-    }
-
-    public int getNumberOfPages() {
-        return NumberOfPages;
-    }
-
-    public void setNumberOfPages(int numberOfPages) {
-        NumberOfPages = numberOfPages;
     }
 
     public String getGender() {
@@ -82,6 +55,14 @@ public class Books {
         return pages;
     }
 
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
+    }
+
+    public void setPages(String pages) {
+        this.pages = pages;
+    }
+
     public boolean equals(Object obj) {
         if (this == obj) {
             return true;
@@ -100,8 +81,8 @@ public class Books {
     public String toString() {
         return "Books{" +
                 "title='" + title + '\'' +
-                ", ISBN=" + ISBN +
-                ", NumberOfPages=" + NumberOfPages +
+                ", ISBN=" + isbn +
+                ", NumberOfPages=" + pages +
                 ", gender='" + gender + '\'' +
                 ", author='" + author + '\'' +
                 '}';

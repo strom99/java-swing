@@ -2,9 +2,12 @@ package Controller;
 
 import Model.Author;
 import Exception.AuthorException;
+import Model.Books;
 
 import javax.swing.*;
 import java.util.ArrayList;
+
+import static Controller.ControllerBook.getBookByIsbn;
 
 public class ControllerAuthor {
     public static ArrayList<Author> Authors = new ArrayList<>();
@@ -30,10 +33,19 @@ public class ControllerAuthor {
     }
 
     public static void modifyAuthor(Author x, String newName, String newSurname , String newSecondSurname, String newCountry) throws AuthorException  {
+        ArrayList<String> books = ControllerBook.searchBooksAuthor(x);
+        String Author = newName+" "+newSurname+" "+newSecondSurname;
+        for (String d : books) {
+            Books s = getBookByIsbn(d);
+            s.setAuthor(Author);
+        }
+
         x.setName(newName);
         x.setSurname(newSurname);
         x.setSecondSurname(newSecondSurname);
         x.setCountry(newCountry);
+        System.out.println(x);
+
     }
 
     public static void deleteAuthor(Author x) throws AuthorException {

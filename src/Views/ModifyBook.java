@@ -37,8 +37,7 @@ public class ModifyBook extends JDialog {
 
 
         for (Books u : ControllerBook.Books) {
-            String x = String.valueOf(u.getISBN());
-            comboBoxModBooks.addItem(x + "-" + u.getTitle());
+            comboBoxModBooks.addItem(u.getIsbn() + "-" + u.getTitle());
         }
         selectItemBook();
 

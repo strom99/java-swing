@@ -18,7 +18,7 @@
         </properties>
         <border type="none"/>
         <children>
-          <component id="927cf" class="javax.swing.JButton" binding="buttonDelete">
+          <component id="927cf" class="javax.swing.JButton" binding="buttonDeleteBook">
             <constraints>
               <grid row="1" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -50,7 +50,7 @@
               <text value=""/>
             </properties>
           </component>
-          <component id="b6f51" class="javax.swing.JButton" binding="buttonCancel">
+          <component id="b6f51" class="javax.swing.JButton" binding="buttonCancelBook">
             <constraints>
               <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -75,7 +75,7 @@
           </vspacer>
         </children>
       </grid>
-      <component id="5ae3c" class="javax.swing.JComboBox" binding="comboBox1" default-binding="true">
+      <component id="5ae3c" class="javax.swing.JComboBox" binding="comboBoxDeleteBook">
         <constraints>
           <grid row="2" column="2" row-span="1" col-span="3" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>

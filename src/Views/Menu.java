@@ -42,6 +42,9 @@ public class Menu extends JFrame {
 
         Authors.add(new Author("feliu", "castello", "tomillo", "Barcelona"));
         Authors.add(new Author("Javi", "Perea", "tert", "Badalona"));
+        ControllerBook.Books.add(new Books("dddd", "2332132", "feliu castello tomillo", "43", "dreaa"));
+        ControllerBook.Books.add(new Books("fffff", "22222", "Javi Perea tert", "23", "dreaa"));
+        ControllerBook.Books.add(new Books("sssss", "33333", "Javi Perea tert", "23", "dreaa"));
 
         newButtonAuthors.addActionListener(new ActionListener() {
             @Override

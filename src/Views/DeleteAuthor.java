@@ -1,16 +1,21 @@
 package Views;
 
 import Controller.ControllerAuthor;
+import Controller.ControllerBook;
 import Model.Author;
+import Model.Books;
 
 import javax.swing.*;
 import javax.swing.plaf.synth.SynthOptionPaneUI;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import static Controller.ControllerAuthor.deleteAuthor;
 import static Controller.ControllerAuthor.getAuthorByFullName;
+import static Controller.ControllerBook.getBookByIsbn;
+import static Controller.ControllerBook.searchBooksAuthor;
 
 public class DeleteAuthor extends JDialog {
 
@@ -51,8 +56,24 @@ public class DeleteAuthor extends JDialog {
     }
 
     public void delete() throws Exception {
-        Author x = getAuthorByFullName((String) comboBoxAuthorsDelete.getSelectedItem());
-        deleteAuthor(x);
+        int response = JOptionPane.showConfirmDialog(null, "Estas seguro???", "Seguro", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+
+        if (response == JOptionPane.YES_OPTION) {
+            Author x = getAuthorByFullName((String) comboBoxAuthorsDelete.getSelectedItem());
+            deleteAuthor(x);
+            ArrayList<String> X = searchBooksAuthor(x);
+            for (String libros : X) {
+                Books s = getBookByIsbn(libros);
+                ControllerBook.Books.remove(s);
+            }
+            JOptionPane.showMessageDialog(this, "Eliminado Correctamente", "Eliminado", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            dispose();
+        }
+
+
+
+
 
         /*try{
             x = getAuthorByFullName((String)comboBoxAuthorsDelete.getSelectedItem());
