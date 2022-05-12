@@ -5,7 +5,10 @@ import Model.Books;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import static Controller.ControllerBook.changeValuesBook;
 import static Controller.ControllerBook.getBookByIsbn;
 
 public class ModifyBook extends JDialog {
@@ -29,6 +32,8 @@ public class ModifyBook extends JDialog {
         setTitle("Modify Book");
         setContentPane(panelModify);
         setSize(600, 500);
+        // desactive edition text field ISBN
+        textFieldISBN.setEnabled(false);
 
 
         for (Books u : ControllerBook.Books) {
@@ -36,19 +41,39 @@ public class ModifyBook extends JDialog {
             comboBoxModBooks.addItem(x + "-" + u.getTitle());
         }
         selectItemBook();
+
+        buttonCancel.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+            }
+        });
+        buttonSelectModifyBook.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                selectItemBook();
+            }
+        });
+        buttonCheckEdition.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ModifyBook();
+            }
+        });
     }
 
     public void selectItemBook() {
-        try {
-            bookSelectionated = getBookByIsbn((String) comboBoxModBooks.getSelectedItem());
-            textFieldTitle.setText(bookSelectionated.getTitle());
-            textFieldAuthorName.setText(bookSelectionated.getAuthor());
-            textFieldISBN.setText(bookSelectionated.getIsbn());
-            textFieldNuPages.setText(bookSelectionated.getPages());
-            textFieldGender.setText(bookSelectionated.getGender());
-        } catch (Exception.BookException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error cargando usuarios", JOptionPane.ERROR_MESSAGE);
-        }
+        bookSelectionated = getBookByIsbn((String) comboBoxModBooks.getSelectedItem());
+        textFieldTitle.setText(bookSelectionated.getTitle());
+        textFieldAuthorName.setText(bookSelectionated.getAuthor());
+        textFieldISBN.setText(bookSelectionated.getIsbn());
+        textFieldNuPages.setText(bookSelectionated.getPages());
+        textFieldGender.setText(bookSelectionated.getGender());
+    }
+
+    public void ModifyBook() {
+        changeValuesBook(bookSelectionated, textFieldTitle.getText(), textFieldAuthorName.getText(), textFieldNuPages.getText(), textFieldGender.getText());
+        dispose();
     }
 
     {

@@ -38,7 +38,6 @@ public class ModifyAuthor extends JDialog {
 
         for (Author u : ControllerAuthor.getAuthors()) {
             comboBoxAuthors.addItem(u.getName() + " " + u.getSurname() + " " + u.getSecondSurname());
-            //u.getName() + ":" + u.getSurname() + ":" + u.getSecondSurname() + ":" + u.getCountry()
         }
 
         selectItem();

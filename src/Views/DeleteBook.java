@@ -1,5 +1,8 @@
 package Views;
 
+import Controller.ControllerBook;
+import Model.Books;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -14,6 +17,10 @@ public class DeleteBook extends JDialog {
         setTitle("Delect Book");
         setContentPane(panelDeleteBook);
         setSize(500, 200);
+
+        for (Books x : ControllerBook.getBooks()) {
+            System.out.println(x.getISBN() + " " + x.getTitle());
+        }
     }
 
     {

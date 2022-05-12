@@ -7,9 +7,11 @@ import java.awt.print.Book;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import Exception.BookException;
+import Exception.*;
 
 import static Controller.ControllerAuthor.Authors;
+import static Controller.ControllerAuthor.getAuthorByFullName;
+import static MethodsGlobals.methods.separateFullNameByName;
 
 public class ControllerBook {
 
@@ -44,13 +46,41 @@ public class ControllerBook {
         return Authors.get(Authors.indexOf(author));
     }
 
-    public static Books getBookByIsbn(String x) throws BookException {
+    public static Books getBookByIsbn(String x) {
         String[] parts = x.split("-");
         Books w = new Books(parts[0]);
-        if (!Books.contains(w)) {
-            throw new BookException("Error ISBN");
+        if(!CopyBooks.contains(w)){
+            System.out.println("error");
         }
-        return w;
+        return CopyBooks.get(CopyBooks.indexOf(w));
+    }
+
+    public static void changeValuesBook(Books book , String title ,String author, String pages,String gender){
+        // modify books array original
+        int pagesTrasn = Integer.parseInt(pages);
+
+        // Modify array author
+        String change = book.getAuthor();
+        try{
+            Author m = getAuthorByFullName(change);/*
+            String name = (String) separateFullNameByName(change);*/
+            String[] x = author.split(" ");
+            m.setName(x[0]);
+            m.setSurname(x[1]);
+            m.setSecondSurname(x[2]);
+
+        }catch (AuthorException x){
+//JoptionPaNW        }
+        System.out.println(book.getAuthor());
+        System.out.println("new"+ author);
+        book.setTitle(title);
+        book.setAuthor(author);
+        book.setNumberOfPages(pagesTrasn);
+        book.setGender(gender);
+
+        System.out.println(book);
+
+        // modify CopyBooks array
     }
 
 }

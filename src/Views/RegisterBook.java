@@ -11,6 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import Exception.BookException;
 
+import static Controller.ControllerAuthor.getAuthorByFullName;
 import static Controller.ControllerBook.getAuthorBook;
 import static Controller.ControllerBook.registerBooks;
 
@@ -36,6 +37,7 @@ public class RegisterBook extends JDialog {
         for (Author u : ControllerAuthor.getAuthors()) {
             comboBoxRegBooks.addItem(u.getName() + " " + u.getSurname() + " " + u.getSecondSurname());
         }
+        selectItemAuthor();
 
         cancelButtonRegBook.addActionListener(new ActionListener() {
             @Override
@@ -57,8 +59,7 @@ public class RegisterBook extends JDialog {
         } else {
             String title = textFieldTitle.getText();
             String ISBN = textFieldISBN.getText();
-            Author nameAuthor = getAuthorBook((String) comboBoxRegBooks.getSelectedItem());
-            String Author = nameAuthor.getName() + " " + nameAuthor.getSurname() + " " + nameAuthor.getSecondSurname();
+            String author = selectItemAuthor();
             String NumberPages = textFieldNumPages.getText();
             String gender = textFieldGender.getText();
 
@@ -66,7 +67,7 @@ public class RegisterBook extends JDialog {
                 JOptionPane.showMessageDialog(this, "No se puede dejar campos en blanco", "Datos vacíos", JOptionPane.WARNING_MESSAGE);
             } else {
                 try {
-                    Books x = new Books(title, ISBN, Author, NumberPages, gender);
+                    Books x = new Books(title, ISBN, author, NumberPages, gender);
                     registerBooks(x);
                     JOptionPane.showMessageDialog(this, "Libro registrado", "Libro registrado", JOptionPane.INFORMATION_MESSAGE);
                     // salida por pantalla auxiliar para mí, para comprobar que todo va bien
@@ -77,6 +78,12 @@ public class RegisterBook extends JDialog {
                 }
             }
         }
+    }
+
+    public String selectItemAuthor() {
+        Author nameAuthor = getAuthorBook((String) comboBoxRegBooks.getSelectedItem());
+        String Author = nameAuthor.getName() + " " + nameAuthor.getSurname() + " " + nameAuthor.getSecondSurname();
+        return Author;
     }
 
     {

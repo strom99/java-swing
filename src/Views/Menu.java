@@ -40,8 +40,8 @@ public class Menu extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
 
-        Authors.add(new Author("caca", "caca", "caca", "caca"));
-        Authors.add(new Author("test", "test", "test", "test"));
+        Authors.add(new Author("feliu", "castello", "tomillo", "Barcelona"));
+        Authors.add(new Author("Javi", "Perea", "tert", "Badalona"));
 
         newButtonAuthors.addActionListener(new ActionListener() {
             @Override

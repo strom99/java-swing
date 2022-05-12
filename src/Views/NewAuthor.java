@@ -59,12 +59,12 @@ public class NewAuthor extends JDialog {
             Author u = new Author(name, surname, SeSurname, country);
             try {
                 register(u);
-                JOptionPane.showMessageDialog(this, "Usuario registrado", "Usuario registrado", JOptionPane.INFORMATION_MESSAGE);
-                // salida por pantalla auxiliar para mí, para comprobar que todo va bien
+                JOptionPane.showMessageDialog(this, "Autor registrado", "autor registrado", JOptionPane.INFORMATION_MESSAGE);
+                // check
                 System.out.println(ControllerAuthor.getAuthors());
                 dispose();
             } catch (AuthorException ex) {
-                JOptionPane.showMessageDialog(this, ex.getMessage(), "Error en alta", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, ex.getMessage(), "Error en Registro", JOptionPane.ERROR_MESSAGE);
             }
         }
     }
