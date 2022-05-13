@@ -42,9 +42,10 @@ public class Menu extends JFrame {
 
         Authors.add(new Author("feliu", "castello", "tomillo", "Barcelona"));
         Authors.add(new Author("Javi", "Perea", "tert", "Badalona"));
-        ControllerBook.Books.add(new Books("dddd", "2332132", "feliu castello tomillo", "43", "dreaa"));
-        ControllerBook.Books.add(new Books("fffff", "22222", "Javi Perea tert", "23", "dreaa"));
-        ControllerBook.Books.add(new Books("sssss", "33333", "Javi Perea tert", "23", "dreaa"));
+        Authors.add(new Author("Daniel", "Goleman", "were", "Badalona"));
+        ControllerBook.Books.add(new Books("las mil noches", "2332132", "feliu castello tomillo", "43", "Ficcion"));
+        ControllerBook.Books.add(new Books("la naranja mecanica", "22222", "Javi Perea tert", "23", "Drama"));
+        ControllerBook.Books.add(new Books("metamorfosis", "33333", "Daniel Goleman were", "23", "Educativo"));
 
         newButtonAuthors.addActionListener(new ActionListener() {
             @Override
@@ -108,7 +109,6 @@ public class Menu extends JFrame {
 
     public static void main(String[] args) {
         Menu menu = new Menu();
-
     }
 
     public void removeAuthor() {

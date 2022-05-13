@@ -49,31 +49,34 @@ public class ControllerBook {
         return Books.get(Books.indexOf(w));
     }
 
-    public static void changeValuesBook(Books book, String title, String author, String pages, String gender) {
-        // modify books array original
-
+    public static boolean changeValuesBook(Books book, String title, String author, String pages, String gender) {
+        boolean confirm = false;
         // Modify array author
         String change = book.getAuthor();
         try {
-            Author m = getAuthorByFullName(change);/*
-            String name = (String) separateFullNameByName(change);*/
             String[] x = author.split(" ");
-            m.setName(x[0]);
-            m.setSurname(x[1]);
-            m.setSecondSurname(x[2]);
+            Author m = getAuthorByFullName(change);
+            Author newAuthr = new Author(x[0], x[1] , x[2]);
 
+            if(Authors.contains(newAuthr)){
+                throw new AuthorException("Este author ya existe");
+            }else{
+                /* String name = (String) separateFullNameByName(change);*/
+                m.setName(x[0]);
+                m.setSurname(x[1]);
+                m.setSecondSurname(x[2]);
 
+                book.setTitle(title);
+                book.setAuthor(author);
+                book.setPages(pages);
+                book.setGender(gender);
+                confirm = true;
+
+            }
         } catch (AuthorException x) {
             JOptionPane.showMessageDialog(null,x.getMessage());
         }
-        System.out.println(book.getAuthor());
-        System.out.println("new" + author);
-        book.setTitle(title);
-        book.setAuthor(author);
-        book.setPages(pages);
-        book.setGender(gender);
-        System.out.println(book);
-
+        return confirm;
     }
 
     public static ArrayList searchBooksAuthor(Author x){

@@ -43,6 +43,7 @@ public class ModifyAuthor extends JDialog {
             comboBoxAuthors.addItem(u.getName() + " " + u.getSurname() + " " + u.getSecondSurname());
         }
 
+
         selectItem();
         // cancel modify
         buttonCancelModify.addActionListener(new ActionListener() {
@@ -96,7 +97,7 @@ public class ModifyAuthor extends JDialog {
             dispose();
         } catch (AuthorException ex) {
             // No debería darse, pero muestro msg
-            JOptionPane.showConfirmDialog(this, ex.getMessage());
+            JOptionPane.showMessageDialog(this, ex.getMessage());
         }
     }
 

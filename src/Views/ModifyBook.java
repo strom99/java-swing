@@ -7,6 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.print.Book;
 
 import static Controller.ControllerBook.changeValuesBook;
 import static Controller.ControllerBook.getBookByIsbn;
@@ -71,8 +72,10 @@ public class ModifyBook extends JDialog {
     }
 
     public void ModifyBook() {
-        changeValuesBook(bookSelectionated, textFieldTitle.getText(), textFieldAuthorName.getText(), textFieldNuPages.getText(), textFieldGender.getText());
-        dispose();
+        if (changeValuesBook(bookSelectionated, textFieldTitle.getText(), textFieldAuthorName.getText(), textFieldNuPages.getText(), textFieldGender.getText())) {
+            dispose();
+        }
+
     }
 
     {

@@ -71,4 +71,14 @@ public class Author {
         final Author other = (Author) obj;
         return name.equalsIgnoreCase(other.name) && surname.equalsIgnoreCase(other.surname) && secondSurname.equalsIgnoreCase(other.secondSurname);
     }
+
+    @Override
+    public String toString() {
+        return "Author{" +
+                "name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", secondSurname='" + secondSurname + '\'' +
+                ", country='" + country + '\'' +
+                '}';
+    }
 }

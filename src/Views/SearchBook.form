@@ -64,7 +64,7 @@
             </constraints>
             <properties/>
           </component>
-          <component id="b356f" class="javax.swing.JComboBox" binding="comboBoxBooks">
+          <component id="b356f" class="javax.swing.JComboBox" binding="comboBoxGenders">
             <constraints>
               <grid row="2" column="2" row-span="1" col-span="5" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -118,7 +118,7 @@
           <text value="Title"/>
         </properties>
       </component>
-      <component id="c020e" class="javax.swing.JTextField" binding="textField1" default-binding="true">
+      <component id="c020e" class="javax.swing.JTextField" binding="textFieldTitle">
         <constraints>
           <grid row="2" column="2" row-span="1" col-span="6" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -151,7 +151,7 @@
           <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
       </hspacer>
-      <component id="fe7be" class="javax.swing.JTextField" binding="textField2" default-binding="true">
+      <component id="fe7be" class="javax.swing.JTextField" binding="textFieldISBN">
         <constraints>
           <grid row="4" column="2" row-span="1" col-span="6" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -175,7 +175,7 @@
           <text value="Nº Pages"/>
         </properties>
       </component>
-      <component id="74710" class="javax.swing.JTextField" binding="textField3" default-binding="true">
+      <component id="74710" class="javax.swing.JTextField" binding="textFieldPages">
         <constraints>
           <grid row="5" column="2" row-span="1" col-span="6" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -183,7 +183,7 @@
         </constraints>
         <properties/>
       </component>
-      <component id="69a5d" class="javax.swing.JTextField" binding="textField4" default-binding="true">
+      <component id="69a5d" class="javax.swing.JTextField" binding="textFieldGender">
         <constraints>
           <grid row="6" column="2" row-span="1" col-span="6" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -204,7 +204,7 @@
           <grid row="1" column="4" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
       </hspacer>
-      <component id="68991" class="javax.swing.JPasswordField" binding="passwordField1" default-binding="true">
+      <component id="68991" class="javax.swing.JPasswordField" binding="passwordFieldAuthor">
         <constraints>
           <grid row="3" column="2" row-span="1" col-span="6" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -225,6 +225,14 @@
           <grid row="8" column="3" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
       </hspacer>
+      <component id="ae482" class="javax.swing.JButton" binding="buttonCancel">
+        <constraints>
+          <grid row="7" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Cancel"/>
+        </properties>
+      </component>
     </children>
   </grid>
 </form>
