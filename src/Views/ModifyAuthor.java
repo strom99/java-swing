@@ -92,15 +92,18 @@ public class ModifyAuthor extends JDialog {
     public void modifyAction() {
         try {
             // modifyAuthor(authorSelectioned, textFieldSurname.getText() , textFieldSurname.getText() , textFieldSeSurname.getText(),textFieldCountry.getText());
+            if (textFieldModifyName.getText().isEmpty() || textFieldSurname.getText().isEmpty() || textFieldSeSurname.getText().isEmpty()) {
+                throw new AuthorException("no puedes dejar campos vacios");
+            }
             modifyAuthor(authorSelectioned, textFieldModifyName.getText(), textFieldSurname.getText(), textFieldSeSurname.getText(), textFieldCountry.getText());
             JOptionPane.showMessageDialog(this, "El author " + authorSelectioned.getName() + " ha sido modificado con éxito", "Modificación de usuario", JOptionPane.INFORMATION_MESSAGE);
             dispose();
         } catch (AuthorException ex) {
             // No debería darse, pero muestro msg
             JOptionPane.showMessageDialog(this, ex.getMessage());
+
         }
     }
-
 
 
     {

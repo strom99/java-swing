@@ -33,6 +33,7 @@ public class ControllerAuthor {
     }
 
     public static void modifyAuthor(Author x, String newName, String newSurname , String newSecondSurname, String newCountry) throws AuthorException  {
+
         Author check = new Author(newName,newSurname,newSecondSurname);
         // delete books author
         if(Authors.contains(check)){
@@ -50,7 +51,6 @@ public class ControllerAuthor {
             x.setSurname(newSurname);
             x.setSecondSurname(newSecondSurname);
             x.setCountry(newCountry);
-
         }
 
     }
