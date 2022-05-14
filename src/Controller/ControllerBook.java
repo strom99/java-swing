@@ -57,6 +57,7 @@ public class ControllerBook {
             String[] x = author.split(" ");
             Author m = getAuthorByFullName(change);
             Author newAuthr = new Author(x[0], x[1] , x[2]);
+            System.out.println();
 
             if(Authors.contains(newAuthr)){
                 throw new AuthorException("Este author ya existe");
@@ -73,7 +74,10 @@ public class ControllerBook {
                 confirm = true;
 
             }
-        } catch (AuthorException x) {
+        } catch (AuthorException | ArrayIndexOutOfBoundsException x) {
+            if(x instanceof ArrayIndexOutOfBoundsException) {
+                JOptionPane.showMessageDialog(null,"Necesitas el nombre completo");
+            }
             JOptionPane.showMessageDialog(null,x.getMessage());
         }
         return confirm;

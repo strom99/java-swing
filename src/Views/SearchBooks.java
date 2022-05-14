@@ -60,8 +60,8 @@ public class SearchBooks extends JDialog {
         });
     }
 
-    public void windowModify(){
-
+    public void windowModify() {
+        /*
         try {
             authorSelectioned = getAuthorByFullName((String) comboBoxAuthors.getSelectedItem());
             // modifyAuthor(authorSelectioned, textFieldSurname.getText() , textFieldSurname.getText() , textFieldSeSurname.getText(),textFieldCountry.getText());
@@ -71,7 +71,7 @@ public class SearchBooks extends JDialog {
         } catch (AuthorException ex) {
             // No debería darse, pero muestro msg
             JOptionPane.showMessageDialog(this, ex.getMessage());
-        }
+        }*/
     }
 
     {
