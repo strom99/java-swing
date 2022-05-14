@@ -11,7 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import static Controller.ControllerAuthor.getAuthorByFullName;
-import static Controller.ControllerAuthor.modifyAuthor;
+import Exception.AuthorException;
 
 public class SearchBooks extends JDialog {
     Author authorSelectioned;
