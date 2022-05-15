@@ -24,13 +24,11 @@ public class ControllerBook {
 
     public static void registerBooks(Books x) throws BookException {
         if (Books.contains(x)) {
-            throw new BookException("Ya existe un libro con ese ISBN");
+            throw new BookException("There is already a book with that ISBN");
         }
 
         Model.Books u = new Books( x.getTitle(),  x.getIsbn(), x.getAuthor() ,x.getPages(), x.getGender());
         Books.add(u);
-        System.out.println(u);
-
     }
 
     public static Author getAuthorBook(String x) {
@@ -43,7 +41,7 @@ public class ControllerBook {
         String[] parts = x.split("-");
         Books w = new Books(parts[0]);
         if (!Books.contains(w)) {
-            System.out.println("error");
+            System.out.println("Error");
         }
         return Books.get(Books.indexOf(w));
     }
@@ -69,7 +67,7 @@ public class ControllerBook {
         return books;
     }
 
-    public static boolean changeValuesBook(Books book, String title, String author, String pages, String gender) {
+    public static boolean changeValuesBook(Books book, Author authorx, String title, String author, String pages, String gender) {
         boolean confirm = false;
         // Modify array author
         String change = book.getAuthor();
@@ -77,12 +75,11 @@ public class ControllerBook {
             String[] x = author.split(" ");
             Author m = getAuthorByFullName(change);
             Author newAuthr = new Author(x[0], x[1] , x[2]);
-            System.out.println();
 
-            if(Authors.contains(newAuthr)){
-                throw new AuthorException("Este author ya existe");
+            if(Authors.contains(newAuthr) && !authorx.equals(newAuthr)){
+                throw new AuthorException("This author already exists");
             }else{
-                /* String name = (String) separateFullNameByName(change);*/
+                /* separeta by parts full name*/
                 m.setName(x[0]);
                 m.setSurname(x[1]);
                 m.setSecondSurname(x[2]);
@@ -96,7 +93,7 @@ public class ControllerBook {
             }
         } catch (AuthorException | ArrayIndexOutOfBoundsException x) {
             if(x instanceof ArrayIndexOutOfBoundsException) {
-                JOptionPane.showMessageDialog(null,"Necesitas el nombre completo");
+                JOptionPane.showMessageDialog(null,"You need the full name");
             }
             JOptionPane.showMessageDialog(null,x.getMessage());
         }
@@ -106,13 +103,9 @@ public class ControllerBook {
     public static ArrayList searchBooksAuthor(Author x){
         String Author = x.getName() + " " + x.getSurname() + " " + x.getSecondSurname();
         ArrayList<String> books = new ArrayList<>();
-        System.out.println(Author+"A");
-        System.out.println(x.getName());
         for(Books w : ControllerBook.getBooks()){
             if(w.getAuthor().equals(Author)){
                 books.add(w.getIsbn());
-                System.out.println(w.getAuthor()+"ddd");
-                System.out.println(Author+"ss");
             }
         }
         return books;
@@ -123,13 +116,12 @@ public class ControllerBook {
 
     }
 
-    public static Books getObjetcBooks(String x) {
+    public static Books getObjetcBooks(String x) throws AuthorException {
         Model.Books bookNew = new Books(x);
         if (!Books.contains(bookNew)) {
-            System.out.println("error");
+            throw new AuthorException("The book was not found");
         }
         return Books.get(Books.indexOf(bookNew));
     }
-
 
 }
