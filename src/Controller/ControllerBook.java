@@ -13,7 +13,6 @@ import javax.swing.*;
 
 import static Controller.ControllerAuthor.Authors;
 import static Controller.ControllerAuthor.getAuthorByFullName;
-import static MethodsGlobals.methods.separateFullNameByName;
 
 public class ControllerBook {
 
@@ -101,6 +100,14 @@ public class ControllerBook {
     public static void deleteBook(Books x){
             Books.remove(x);
 
+    }
+
+    public static Books getObjetcBooks(String x) {
+        Model.Books bookNew = new Books(x);
+        if (!Books.contains(bookNew)) {
+            System.out.println("error");
+        }
+        return Books.get(Books.indexOf(bookNew));
     }
 
 

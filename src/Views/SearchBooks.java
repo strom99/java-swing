@@ -1,19 +1,24 @@
 package Views;
 
 import Controller.ControllerAuthor;
-import Controller.ControllerBook;
 import Model.Author;
 import Model.Books;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import Exception.*;
 
 import static Controller.ControllerAuthor.getAuthorByFullName;
+import static Controller.ControllerBook.*;
+
 import Exception.AuthorException;
 
 public class SearchBooks extends JDialog {
+
     Author authorSelectioned;
     Books bookSelectioned;
     private JComboBox comboBoxAuthors;
@@ -25,26 +30,25 @@ public class SearchBooks extends JDialog {
     private JLabel labelNumberPages;
     private JLabel labelGender;
     private JTextField textFieldTitle;
-    private JPasswordField passwordFieldAuthor;
     private JTextField textFieldISBN;
     private JTextField textFieldPages;
     private JTextField textFieldGender;
     private JButton buttonSearchBook;
     private JButton buttonCancel;
+    private JTextField textFieldAuthor;
 
     public SearchBooks(JFrame parent, boolean modal) {
         super(parent, modal);
+
         setTitle("Search Book");
         setContentPane(panelBook);
         setSize(600, 500);
 
+
         for (Author x : ControllerAuthor.Authors) {
             comboBoxAuthors.addItem(x.getName() + " " + x.getSurname() + " " + x.getSecondSurname());
         }
-
-        for (Books x : ControllerBook.Books) {
-            comboBoxGenders.addItem(x.getGender());
-        }
+        comboBoxAuthors.setSelectedItem(null);
 
         buttonCancel.addActionListener(new ActionListener() {
             @Override
@@ -55,23 +59,36 @@ public class SearchBooks extends JDialog {
         buttonSearchBook.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                windowModify();
+                try {
+                    windowModify();
+                } catch (AuthorException ex) {
+                    ex.printStackTrace();
+                }
             }
         });
     }
 
-    public void windowModify() {
-        /*
+    public void windowModify() throws AuthorException {
+
         try {
-            authorSelectioned = getAuthorByFullName((String) comboBoxAuthors.getSelectedItem());
-            // modifyAuthor(authorSelectioned, textFieldSurname.getText() , textFieldSurname.getText() , textFieldSeSurname.getText(),textFieldCountry.getText());
-            checkAuthorSearch(authorSelectioned, textFieldModifyName.getText(), textFieldSurname.getText(), textFieldSeSurname.getText(), textFieldCountry.getText());
-            JOptionPane.showMessageDialog(this, "El author " + authorSelectioned.getName() + " ha sido modificado con éxito", "Modificación de usuario", JOptionPane.INFORMATION_MESSAGE);
-            dispose();
-        } catch (AuthorException ex) {
-            // No debería darse, pero muestro msg
-            JOptionPane.showMessageDialog(this, ex.getMessage());
-        }*/
+            if (comboBoxAuthors.getSelectedItem() != null) {
+                authorSelectioned = getAuthorByFullName((String) comboBoxAuthors.getSelectedItem());
+                ArrayList<String> listBooks = searchBooksAuthor(authorSelectioned);
+                for (String x : listBooks) {
+                    bookSelectioned = getObjetcBooks(x);
+                    textFieldTitle.setText(bookSelectioned.getTitle());
+                    textFieldISBN.setText(bookSelectioned.getIsbn());
+                    textFieldAuthor.setText(bookSelectioned.getAuthor());
+                    textFieldGender.setText(bookSelectioned.getGender());
+                    textFieldPages.setText(bookSelectioned.getPages());
+                }
+
+            } else {
+                throw new AuthorException("Seleciona una opcion");
+            }
+        } catch (AuthorException | NullPointerException | IndexOutOfBoundsException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error cargando usuarios", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     {
@@ -90,7 +107,7 @@ public class SearchBooks extends JDialog {
      */
     private void $$$setupUI$$$() {
         panelBook = new JPanel();
-        panelBook.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(9, 10, new Insets(0, 0, 0, 0), -1, -1));
+        panelBook.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(8, 10, new Insets(0, 0, 0, 0), -1, -1));
         final JPanel panel1 = new JPanel();
         panel1.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(4, 11, new Insets(0, 0, 0, 0), -1, -1));
         panel1.setBackground(new Color(-865102));
@@ -132,46 +149,40 @@ public class SearchBooks extends JDialog {
         panel1.add(buttonSearchBook, new com.intellij.uiDesigner.core.GridConstraints(2, 8, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         labelTitle = new JLabel();
         labelTitle.setText("Title");
-        panelBook.add(labelTitle, new com.intellij.uiDesigner.core.GridConstraints(2, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        panelBook.add(labelTitle, new com.intellij.uiDesigner.core.GridConstraints(1, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         textFieldTitle = new JTextField();
-        panelBook.add(textFieldTitle, new com.intellij.uiDesigner.core.GridConstraints(2, 2, 1, 6, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
+        panelBook.add(textFieldTitle, new com.intellij.uiDesigner.core.GridConstraints(1, 2, 1, 6, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
         final com.intellij.uiDesigner.core.Spacer spacer10 = new com.intellij.uiDesigner.core.Spacer();
-        panelBook.add(spacer10, new com.intellij.uiDesigner.core.GridConstraints(4, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
+        panelBook.add(spacer10, new com.intellij.uiDesigner.core.GridConstraints(3, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
         final com.intellij.uiDesigner.core.Spacer spacer11 = new com.intellij.uiDesigner.core.Spacer();
-        panelBook.add(spacer11, new com.intellij.uiDesigner.core.GridConstraints(4, 9, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
+        panelBook.add(spacer11, new com.intellij.uiDesigner.core.GridConstraints(3, 9, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
         final com.intellij.uiDesigner.core.Spacer spacer12 = new com.intellij.uiDesigner.core.Spacer();
-        panelBook.add(spacer12, new com.intellij.uiDesigner.core.GridConstraints(1, 6, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_VERTICAL, 1, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
-        final com.intellij.uiDesigner.core.Spacer spacer13 = new com.intellij.uiDesigner.core.Spacer();
-        panelBook.add(spacer13, new com.intellij.uiDesigner.core.GridConstraints(7, 7, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_VERTICAL, 1, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
-        final com.intellij.uiDesigner.core.Spacer spacer14 = new com.intellij.uiDesigner.core.Spacer();
-        panelBook.add(spacer14, new com.intellij.uiDesigner.core.GridConstraints(1, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
+        panelBook.add(spacer12, new com.intellij.uiDesigner.core.GridConstraints(6, 7, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_VERTICAL, 1, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
         textFieldISBN = new JTextField();
-        panelBook.add(textFieldISBN, new com.intellij.uiDesigner.core.GridConstraints(4, 2, 1, 6, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
+        panelBook.add(textFieldISBN, new com.intellij.uiDesigner.core.GridConstraints(3, 2, 1, 6, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
         labelISBN = new JLabel();
         labelISBN.setText("ISBN");
-        panelBook.add(labelISBN, new com.intellij.uiDesigner.core.GridConstraints(4, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        panelBook.add(labelISBN, new com.intellij.uiDesigner.core.GridConstraints(3, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         labelNumberPages = new JLabel();
         labelNumberPages.setText("Nº Pages");
-        panelBook.add(labelNumberPages, new com.intellij.uiDesigner.core.GridConstraints(5, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        panelBook.add(labelNumberPages, new com.intellij.uiDesigner.core.GridConstraints(4, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         textFieldPages = new JTextField();
-        panelBook.add(textFieldPages, new com.intellij.uiDesigner.core.GridConstraints(5, 2, 1, 6, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
+        panelBook.add(textFieldPages, new com.intellij.uiDesigner.core.GridConstraints(4, 2, 1, 6, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
         textFieldGender = new JTextField();
-        panelBook.add(textFieldGender, new com.intellij.uiDesigner.core.GridConstraints(6, 2, 1, 6, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
+        panelBook.add(textFieldGender, new com.intellij.uiDesigner.core.GridConstraints(5, 2, 1, 6, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
         labelGender = new JLabel();
         labelGender.setText("Gender");
-        panelBook.add(labelGender, new com.intellij.uiDesigner.core.GridConstraints(6, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        final com.intellij.uiDesigner.core.Spacer spacer15 = new com.intellij.uiDesigner.core.Spacer();
-        panelBook.add(spacer15, new com.intellij.uiDesigner.core.GridConstraints(1, 4, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
-        passwordFieldAuthor = new JPasswordField();
-        panelBook.add(passwordFieldAuthor, new com.intellij.uiDesigner.core.GridConstraints(3, 2, 1, 6, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
+        panelBook.add(labelGender, new com.intellij.uiDesigner.core.GridConstraints(5, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         labelAuthor = new JLabel();
         labelAuthor.setText("Author");
-        panelBook.add(labelAuthor, new com.intellij.uiDesigner.core.GridConstraints(3, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        final com.intellij.uiDesigner.core.Spacer spacer16 = new com.intellij.uiDesigner.core.Spacer();
-        panelBook.add(spacer16, new com.intellij.uiDesigner.core.GridConstraints(8, 3, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
+        panelBook.add(labelAuthor, new com.intellij.uiDesigner.core.GridConstraints(2, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        final com.intellij.uiDesigner.core.Spacer spacer13 = new com.intellij.uiDesigner.core.Spacer();
+        panelBook.add(spacer13, new com.intellij.uiDesigner.core.GridConstraints(7, 3, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
         buttonCancel = new JButton();
         buttonCancel.setText("Cancel");
-        panelBook.add(buttonCancel, new com.intellij.uiDesigner.core.GridConstraints(7, 5, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        panelBook.add(buttonCancel, new com.intellij.uiDesigner.core.GridConstraints(6, 5, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        textFieldAuthor = new JTextField();
+        panelBook.add(textFieldAuthor, new com.intellij.uiDesigner.core.GridConstraints(2, 2, 1, 6, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
     }
 
     /**
