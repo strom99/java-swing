@@ -36,7 +36,7 @@ public class ControllerAuthor {
 
         Author check = new Author(newName,newSurname,newSecondSurname);
         // delete books author
-        if(Authors.contains(check)){
+        if(Authors.contains(check) && !x.equals(check)){
             throw new AuthorException("Ya existe ese autor");
         }else{
             ArrayList<String> books = ControllerBook.searchBooksAuthor(x);

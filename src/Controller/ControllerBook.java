@@ -3,9 +3,9 @@ package Controller;
 import Model.Author;
 import Model.Books;
 
-import java.awt.print.Book;
 import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import Exception.*;
 
@@ -46,6 +46,27 @@ public class ControllerBook {
             System.out.println("error");
         }
         return Books.get(Books.indexOf(w));
+    }
+
+    public static List<Books> getBooksByGenre (String genre) {
+        List<Books> books = new ArrayList<>();
+        for(Books book : ControllerBook.getBooks()) {
+            if (book.getGender().equals(genre)) {
+                books.add(book);
+            }
+        }
+        return books;
+    }
+
+    public static List<Books> getBooksByGenreAndAuthor (String genre, Author x) {
+        String author = x.getName() + " " + x.getSurname() + " " + x.getSecondSurname();
+        List<Books> books = new ArrayList<>();
+        for(Books book: ControllerBook.getBooks()) {
+            if (book.getAuthor().equals(author) && book.getGender().equals(genre)) {
+                books.add(book);
+            }
+        }
+        return books;
     }
 
     public static boolean changeValuesBook(Books book, String title, String author, String pages, String gender) {

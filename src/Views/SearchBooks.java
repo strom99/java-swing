@@ -1,6 +1,7 @@
 package Views;
 
 import Controller.ControllerAuthor;
+import Controller.ControllerBook;
 import Model.Author;
 import Model.Books;
 
@@ -21,7 +22,6 @@ import Exception.AuthorException;
 
 public class SearchBooks extends JDialog {
 
-    Object[][] data = null;
     Author authorSelectioned;
     Books bookSelectioned;
     DefaultTableModel model;
@@ -45,11 +45,18 @@ public class SearchBooks extends JDialog {
         tableBooks.getTableHeader().setBackground(new Color(242, 204, 178));
         setSize(700, 400);
 
-
+        comboBoxAuthors.addItem(null);
         for (Author x : ControllerAuthor.Authors) {
             comboBoxAuthors.addItem(x.getName() + " " + x.getSurname() + " " + x.getSecondSurname());
         }
         comboBoxAuthors.setSelectedItem(null);
+
+        comboBoxGenders.addItem(null);
+        for (Books x : Books) {
+            comboBoxGenders.addItem(x.getGender());
+        }
+        comboBoxGenders.setSelectedItem(null);
+
 
         buttonCancel.addActionListener(new ActionListener() {
             @Override
@@ -61,7 +68,7 @@ public class SearchBooks extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    windowModify();
+                    windowSearch();
                 } catch (AuthorException ex) {
                     ex.printStackTrace();
                 }
@@ -69,12 +76,15 @@ public class SearchBooks extends JDialog {
         });
     }
 
-    public void windowModify() throws AuthorException {
+    public void windowSearch() throws AuthorException {
+        model.setRowCount(0);
 
         try {
-            if (comboBoxAuthors.getSelectedItem() != null) {
+            if (comboBoxAuthors.getSelectedItem() != null && comboBoxGenders.getSelectedItem() == null) {
                 authorSelectioned = getAuthorByFullName((String) comboBoxAuthors.getSelectedItem());
                 ArrayList<String> listBooks = searchBooksAuthor(authorSelectioned);
+
+                model.setRowCount(0);
 
                 for (int i = 0; i < listBooks.size(); i++) {
                     bookSelectioned = getObjetcBooks(listBooks.get(i));
@@ -82,6 +92,16 @@ public class SearchBooks extends JDialog {
                     model.addRow(objs);
                 }
 
+            } else if (comboBoxGenders.getSelectedItem() != null && comboBoxAuthors.getSelectedItem() == null) {
+                for (Books book : getBooksByGenre((String) comboBoxGenders.getSelectedItem())) {
+                    Object[] objs = {book.getTitle(), book.getIsbn(), book.getAuthor(), book.getGender(), book.getPages()};
+                    model.addRow(objs);
+                }
+            } else if (comboBoxAuthors.getSelectedItem() != null && comboBoxGenders.getSelectedItem() != null) {
+                for (Books book : getBooksByGenreAndAuthor((String) comboBoxGenders.getSelectedItem(), getAuthorByFullName((String) comboBoxAuthors.getSelectedItem()))) {
+                    Object[] objs = {book.getTitle(), book.getIsbn(), book.getAuthor(), book.getGender(), book.getPages()};
+                    model.addRow(objs);
+                }
             } else {
                 throw new AuthorException("Seleciona una opcion");
             }
@@ -138,6 +158,8 @@ public class SearchBooks extends JDialog {
         comboBoxGenders = new JComboBox();
         Font comboBoxGendersFont = this.$$$getFont$$$("Courier", Font.PLAIN, 12, comboBoxGenders.getFont());
         if (comboBoxGendersFont != null) comboBoxGenders.setFont(comboBoxGendersFont);
+        final DefaultComboBoxModel defaultComboBoxModel1 = new DefaultComboBoxModel();
+        comboBoxGenders.setModel(defaultComboBoxModel1);
         panel1.add(comboBoxGenders, new com.intellij.uiDesigner.core.GridConstraints(2, 2, 1, 5, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         final com.intellij.uiDesigner.core.Spacer spacer4 = new com.intellij.uiDesigner.core.Spacer();
         panel1.add(spacer4, new com.intellij.uiDesigner.core.GridConstraints(0, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));

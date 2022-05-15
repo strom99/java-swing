@@ -74,6 +74,7 @@
             </constraints>
             <properties>
               <font name="Courier" size="12" style="0"/>
+              <model/>
             </properties>
           </component>
           <hspacer id="e931a">
