@@ -69,6 +69,7 @@ public class Author {
             return false;
         }
         final Author other = (Author) obj;
+        // equals for the full name
         return name.equalsIgnoreCase(other.name) && surname.equalsIgnoreCase(other.surname) && secondSurname.equalsIgnoreCase(other.secondSurname);
     }
 

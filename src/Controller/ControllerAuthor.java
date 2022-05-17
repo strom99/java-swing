@@ -14,7 +14,7 @@ public class ControllerAuthor {
 
     public static void register(Author x) throws AuthorException {
         if (Authors.contains(x)) {
-            throw new AuthorException("Ya existe un autor con ese nombre");
+            throw new AuthorException("This author already exists");
         }
         Authors.add(x);
     }
@@ -27,7 +27,7 @@ public class ControllerAuthor {
         String[] parts = x.split(" ");
         Author author = new Author(parts[0], parts[1], parts[2]);
         if (!Authors.contains(author)) {
-            throw new AuthorException("No existe un autor con ese nombre");
+            throw new AuthorException("There is no author by that name.");
         }
         return Authors.get(Authors.indexOf(author));
     }
@@ -37,7 +37,7 @@ public class ControllerAuthor {
         Author check = new Author(newName,newSurname,newSecondSurname);
         // delete books author
         if(Authors.contains(check) && !x.equals(check)){
-            throw new AuthorException("Ya existe ese autor");
+            throw new AuthorException("This author already exists");
         }else{
             ArrayList<String> books = ControllerBook.searchBooksAuthor(x);
             String Author = newName+" "+newSurname+" "+newSecondSurname;
@@ -57,17 +57,10 @@ public class ControllerAuthor {
 
     public static void deleteAuthor(Author x) throws AuthorException {
         if(!Authors.contains(x)){
-            throw new AuthorException("No se pudo eliminar");
+            throw new AuthorException("Cant delete author");
         }else{
             Authors.remove(x);
         }
     }
-
-    /*public static boolean checkModify(Author x) throws AuthorException{
-        if(Authors.contains(x)){
-            throw new AuthorException("El nombre corresponde a otro author");
-        }
-        return true;
-    }*/
 
 }
